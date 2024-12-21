@@ -1,6 +1,7 @@
 "use client"
 import { Button } from "@/app/components/Button";
 import { LabelledInput } from "@/app/components/LabelledInput";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useRef } from "react";
@@ -15,7 +16,11 @@ export default function signup(){
             <span className="text-2xl font-semibold">Signup</span>
             <LabelledInput title="username" placeholder="Enter your username" type="text" reference={username} />
             <LabelledInput title="password" placeholder="Enter your password" type="text" reference={password} />
-            <Button title="Signup" onClick={()=>{
+            <Button title="Signup" onClick={async()=>{
+                await axios.post('http://localhost:3000/api/user',{
+                    username: username.current?.value,
+                    password: password.current?.value
+                })
                 router.push('/signin')
             }}/>
             </div>

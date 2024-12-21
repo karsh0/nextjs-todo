@@ -1,4 +1,4 @@
-import mongoose, {Schema, model} from "mongoose";
+import mongoose, {Schema, model, models} from "mongoose";
 
 mongoose.connect('mongodb+srv://admin:sdWrBsXuYHdxK3sb@cluster0.plktz.mongodb.net/todo-nextjs')
 
@@ -10,8 +10,9 @@ const userSchema = new Schema({
 
 const todoSchema = new Schema({
     title: String,
+    description: String,
     userId: {type: mongoose.Types.ObjectId, ref: 'User'}
 })
 
-export const userModel = model('user', userSchema)
-export const todoModel = model('todo', todoSchema)
+export const userModel = models.user || model('user', userSchema);
+export const todoModel = models.todo || model('todo', todoSchema);
